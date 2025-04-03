@@ -1,50 +1,43 @@
-import soundfile as sf
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
-from transformers import Qwen2_5OmniModel, Qwen2_5OmniProcessor
-from qwen_omni_utils import process_mm_info
+# Tải mô hình GPT-2 và tokenizer từ Hugging Face
+model_name = "gpt2"
+model = GPT2LMHeadModel.from_pretrained(model_name)
+tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 
-# default: Load the model on the available device(s)
-model = Qwen2_5OmniModel.from_pretrained("Qwen/Qwen2.5-Omni-7B", torch_dtype="auto", device_map="auto")
+# Đặt mô hình vào chế độ đánh giá
+model.eval()
 
-# We recommend enabling flash_attention_2 for better acceleration and memory saving.
-# model = Qwen2_5OmniModel.from_pretrained(
-#     "Qwen/Qwen2.5-Omni-7B",
-#     torch_dtype="auto",
-#     device_map="auto",
-#     attn_implementation="flash_attention_2",
-# )
+# Hàm xử lý câu hỏi và tạo câu trả lời
+def generate_answer(input_text):
+    # Mã hóa văn bản đầu vào
+    inputs = tokenizer.encode(input_text, return_tensors="pt")
 
-processor = Qwen2_5OmniProcessor.from_pretrained("Qwen/Qwen2.5-Omni-7B")
+    # Sinh ra văn bản tiếp theo từ mô hình
+    output = model.generate(inputs, max_length=100, num_return_sequences=1, no_repeat_ngram_size=2)
 
-conversation = [
-    {
-        "role": "system",
-        "content": "You are Qwen, a virtual human developed by the Qwen Team, Alibaba Group, capable of perceiving auditory and visual inputs, as well as generating text and speech.",
-    },
-    {
-        "role": "user",
-        "content": [
-            {"type": "video", "video": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2.5-Omni/draw.mp4"},
-        ],
-    },
-]
+    # Giải mã và trả về văn bản đầu ra
+    generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+    return generated_text
 
-# set use audio in video
-USE_AUDIO_IN_VIDEO = True
+# Chạy chatbot
+def chatbot():
+    print("Chatbot: Chào bạn! Tôi có thể giúp gì cho bạn?")
+    
+    while True:
+        # Nhận câu hỏi từ người dùng
+        user_input = input("Bạn: ")
+        
+        # Kiểm tra nếu người dùng muốn thoát
+        if user_input.lower() == "thoát":
+            print("Chatbot: Tạm biệt!")
+            break
+        
+        # Sinh câu trả lời từ mô hình
+        response = generate_answer(user_input)
+        
+        # In câu trả lời chatbot
+        print(f"Chatbot: {response}")
 
-# Preparation for inference
-text = processor.apply_chat_template(conversation, add_generation_prompt=True, tokenize=False)
-audios, images, videos = process_mm_info(conversation, use_audio_in_video=USE_AUDIO_IN_VIDEO)
-inputs = processor(text=text, audios=audios, images=images, videos=videos, return_tensors="pt", padding=True, use_audio_in_video=USE_AUDIO_IN_VIDEO)
-inputs = inputs.to(model.device).to(model.dtype)
-
-# Inference: Generation of the output text and audio
-text_ids, audio = model.generate(**inputs, use_audio_in_video=USE_AUDIO_IN_VIDEO)
-
-text = processor.batch_decode(text_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-print(text)
-sf.write(
-    "output.wav",
-    audio.reshape(-1).detach().cpu().numpy(),
-    samplerate=24000,
-)
+# Khởi chạy chatbot
+chatbot()
