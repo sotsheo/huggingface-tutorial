@@ -2,6 +2,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from huggingface_hub import login
 login(token="")
+# test
 
 # Kiểm tra thiết bị
 device = "cuda" if torch.cuda.is_available() else "cpu"
