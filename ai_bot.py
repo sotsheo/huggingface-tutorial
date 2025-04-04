@@ -7,7 +7,6 @@ import uvicorn
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 
-
 # ================== CẤU HÌNH HỆ THỐNG ==================
 app = FastAPI()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
