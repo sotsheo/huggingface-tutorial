@@ -4,9 +4,9 @@ import random
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split  # ĐÃ THÊM DÒNG NÀY
+from sklearn.model_selection import train_test_split
 import pickle
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 import uvicorn
 from pydantic import BaseModel
 
@@ -41,8 +41,8 @@ def create_dataset():
     print("Đã tạo dataset: computer_spam.csv")
     return df
 
-# ================== PHẦN 2: HUẤN LUYỆN MODEL ==================
-def preprocess(text):  # ĐƯA HÀM NÀY RA NGOÀI ĐỂ DÙNG CHUNG
+# ================== PHẦN 2: TIỀN XỬ LÝ VÀ MODEL ==================
+def preprocess(text):
     text = text.lower()
     text = ''.join([c for c in text if c.isalpha() or c.isspace()])
     return text
@@ -53,10 +53,8 @@ def train_model():
     except:
         df = create_dataset()
     
-    # Tiền xử lý
     df['processed_text'] = df['text'].apply(preprocess)
     
-    # Chia dữ liệu
     X_train, X_test, y_train, y_test = train_test_split(
         df['processed_text'], 
         df['label'], 
@@ -64,20 +62,16 @@ def train_model():
         random_state=42
     )
     
-    # Vector hóa
     vectorizer = TfidfVectorizer(max_features=1000)
     X_train_vec = vectorizer.fit_transform(X_train)
     X_test_vec = vectorizer.transform(X_test)
     
-    # Huấn luyện
     model = SVC(kernel='linear', probability=True)
     model.fit(X_train_vec, y_train)
     
-    # Đánh giá
     y_pred = model.predict(X_test_vec)
     print("\nBáo cáo đánh giá:\n", classification_report(y_test, y_pred))
     
-    # Lưu model
     with open('spam_model.pkl', 'wb') as f:
         pickle.dump(model, f)
     with open('vectorizer.pkl', 'wb') as f:
@@ -86,12 +80,10 @@ def train_model():
     print("\nĐã lưu model vào: spam_model.pkl và vectorizer.pkl")
     return model, vectorizer
 
-# ================== PHẦN 3: API DỰ ĐOÁN ==================
+# ================== PHẦN 3: API CHÍNH ==================
 app = FastAPI()
 
-class TextRequest(BaseModel):
-    text: str
-
+# Load model
 try:
     with open('spam_model.pkl', 'rb') as f:
         model = pickle.load(f)
@@ -101,37 +93,40 @@ except:
     print("Không tìm thấy model, bắt đầu huấn luyện...")
     model, vectorizer = train_model()
 
-@app.post("/predict")
-def predict(request: TextRequest):
-    processed_text = preprocess(request.text)
+# ================== PHẦN 4: API CHATBOT ĐƠN GIẢN ==================
+@app.get("/chat_reply")
+async def chat_reply(message: str = Query(..., min_length=2)):
+    """API trả lời tự động chỉ cần message, không cần user info"""
+    # Kiểm tra spam
+    processed_text = preprocess(message)
     text_vec = vectorizer.transform([processed_text])
-    prediction = model.predict(text_vec)[0]
-    confidence = model.predict_proba(text_vec).max()
+    is_spam = model.predict(text_vec)[0] == "spam"
     
-    return {
-        "text": request.text,
-        "processed_text": processed_text,
-        "prediction": prediction,
-        "confidence": float(confidence),
-        "is_spam": prediction == "spam"
-    }
+    if is_spam:
+        return {"reply": "Xin lỗi, chúng tôi không hỗ trợ tin nhắn quảng cáo/spam"}
+    
+    # Logic trả lời đơn giản
+    if any(keyword in processed_text for keyword in ["giá", "bao nhiêu"]):
+        product = next((p for p in ["dell", "macbook", "asus"] if p in processed_text), None)
+        if product:
+            prices = {"dell": "25 triệu", "macbook": "32 triệu", "asus": "18 triệu"}
+            return {"reply": f"{product.title()} có giá {prices[product]}"}
+        return {"reply": "Vui lòng cho biết tên sản phẩm cụ thể (Dell, Macbook, Asus...)"}
+    
+    elif "còn hàng" in processed_text:
+        return {"reply": "Sản phẩm vẫn còn hàng, có thể đặt ngay trên website"}
+    
+    elif "bảo hành" in processed_text:
+        return {"reply": "Bảo hành chính hãng 24 tháng tại tất cả chi nhánh"}
+    
+    else:
+        return {"reply": "Bạn cần thông tin về giá, tình trạng hàng hay bảo hành ạ?"}
 
 # ================== CHẠY ỨNG DỤNG ==================
 if __name__ == "__main__":
-    # Tạo dataset nếu chưa có
-    try:
-        pd.read_csv("computer_spam.csv")
-    except:
-        create_dataset()
-    
-    # Huấn luyện model nếu chưa có
-    try:
-        with open('spam_model.pkl', 'rb') as f:
-            model = pickle.load(f)
-    except:
-        train_model()
-    
     # Khởi động API
-    print("\nKhởi động API tại: http://localhost:8000")
-    print("Truy cập http://localhost:8000/docs để test API")
+    print("\nAPI Chatbot Spam Detector đã sẵn sàng")
+    print("Truy cập các endpoint sau:")
+    print("- GET /chat_reply?message=<nội dung> - Chatbot tự động")
+    print("- POST /predict - API phát hiện spam chi tiết")
     uvicorn.run(app, host="0.0.0.0", port=8000)
