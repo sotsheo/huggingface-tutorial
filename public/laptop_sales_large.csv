@@ -328,7 +328,7 @@ ID,Date,Customer,Product,Brand,Price,Quantity,Total
 327,2024-05-23,Donna Wilson,Acer Predator Helios 300,Acer,34000000,2,68000000
 328,2024-10-10,Casey James,HP Spectre x360,HP,28000000,3,84000000
 329,2024-12-29,Justin Barnett,LG Gram 17,LG,27000000,3,81000000
-330,2024-08-15,Scott Williams,ROG Zephyrus G14,Asus,38000000,2,76000000
+330,2024-08-15,Scott Williams,ROG Zephyrus G14,Asus,25000,2,76000000
 331,2024-04-07,Blake Edwards,ROG Zephyrus G14,Asus,38000000,2,76000000
 332,2024-09-13,Michelle Butler,HP Spectre x360,HP,28000000,2,56000000
 333,2024-05-14,Vincent Jackson,Laptop XPS 15,Dell,30000000,2,60000000
@@ -510,7 +510,7 @@ ID,Date,Customer,Product,Brand,Price,Quantity,Total
 509,2025-03-23,Stephen Thompson,MSI GS66 Stealth,MSI,36000000,3,108000000
 510,2025-03-23,Russell French,MacBook Pro 14,Apple,45000000,1,45000000
 511,2024-06-11,Tonya Howe,MSI GS66 Stealth,MSI,36000000,2,72000000
-512,2025-03-06,Edwin Morrison,Surface Laptop 4,Microsoft,25000000,2,50000000
+512,2025-03-06,Edwin Morrison,Surface Laptop 4,Microsoft,3,2,50000000
 513,2025-03-26,Mrs. Virginia Daniels,HP Spectre x360,HP,28000000,3,84000000
 514,2024-10-08,Brandi Gordon,Laptop XPS 15,Dell,30000000,2,60000000
 515,2024-07-14,Brian Martin,MacBook Pro 14,Apple,45000000,2,90000000
@@ -989,7 +989,7 @@ ID,Date,Customer,Product,Brand,Price,Quantity,Total
 988,2024-03-31,Ronald Brandt,Laptop XPS 15,Dell,30000000,2,60000000
 989,2024-07-22,Jacqueline Rodriguez,Acer Predator Helios 300,Acer,34000000,3,102000000
 990,2025-03-14,Charles Love,HP Spectre x360,HP,28000000,3,84000000
-991,2025-01-05,David Gonzalez,Surface Laptop 4,Microsoft,25000000,2,50000000
+991,2025-01-05,David Gonzalez,Surface Laptop 4,Microsoft,21000000,2,50000000
 992,2024-05-16,Jenna Bryant,Laptop XPS 15,Dell,30000000,3,90000000
 993,2025-01-28,George Sherman,ROG Zephyrus G14,Asus,38000000,2,76000000
 994,2024-04-18,Sara Chapman,MSI GS66 Stealth,MSI,36000000,1,36000000
