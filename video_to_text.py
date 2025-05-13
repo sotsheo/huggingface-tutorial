@@ -45,3 +45,4 @@ while cap.isOpened():
     frame_id += 1
 
 cap.release()
+# pip install googletrans==4.0.0-rc1
