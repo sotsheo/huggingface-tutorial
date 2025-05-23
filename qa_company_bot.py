@@ -37,8 +37,8 @@ index.add(doc_embeddings)
 
 print("Đang tải mô hình trả lời câu hỏi...")
 qa_model = pipeline(
-    "text-generation", 
-    model="mistralai/Mistral-7B-Instruct-v0.1",  # Có thể thay đổi nếu bạn dùng local
+    "text2text-generation",
+    model="VietAI/vit5-base",  # Có thể thay đổi nếu bạn dùng local
     device_map="auto", 
     model_kwargs={"torch_dtype": "auto"},
     max_new_tokens=200,
@@ -81,3 +81,8 @@ if __name__ == "__main__":
     print("\n=== HỆ THỐNG HỎI ĐÁP VỀ CÔNG TY ===")
     while True:
         query = input("\nNhập câu hỏi của bạn (hoặc 'exit' để thoát): ")
+        if query.lower().strip() == "exit":
+            print("Tạm biệt!")
+            break
+        answer = answer_question(query)
+        print(f"\n📌 Trả lời: {answer}")
