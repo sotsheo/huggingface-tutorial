@@ -1,0 +1,70 @@
+CÔNG TY ABC
+
+1. Giới thiệu:
+Công ty ABC là doanh nghiệp hàng đầu trong lĩnh vực công nghệ thông tin tại Việt Nam. Thành lập năm 2005, ABC đã phát triển nhanh chóng và trở thành đối tác tin cậy của nhiều doanh nghiệp lớn trong nước và quốc tế. Chúng tôi chuyên cung cấp các giải pháp phần mềm và dịch vụ số hóa toàn diện, từ phát triển phần mềm tùy chỉnh đến tư vấn chuyển đổi số.
+
+2. Sứ mệnh:
+Sứ mệnh của công ty là thúc đẩy quá trình chuyển đổi số tại Việt Nam và khu vực Đông Nam Á, mang lại giá trị bền vững cho khách hàng thông qua các sản phẩm công nghệ tiên tiến và dịch vụ chất lượng cao.
+
+3. Tầm nhìn:
+Trở thành công ty công nghệ hàng đầu châu Á về giải pháp số hóa doanh nghiệp vào năm 2030.
+
+4. Giá trị cốt lõi:
+- Khách hàng là trung tâm của mọi hoạt động.
+- Đổi mới sáng tạo không ngừng.
+- Tinh thần hợp tác và phát triển bền vững.
+- Trách nhiệm xã hội và môi trường.
+
+5. Sản phẩm và dịch vụ:
+- Phần mềm quản lý doanh nghiệp (ERP): Giúp tối ưu hóa quy trình vận hành, quản lý tài chính, nhân sự, sản xuất.
+- Giải pháp điện toán đám mây: Cung cấp nền tảng lưu trữ và xử lý dữ liệu an toàn, linh hoạt.
+- Dịch vụ tư vấn chuyển đổi số: Hỗ trợ doanh nghiệp xây dựng chiến lược và kế hoạch số hóa hiệu quả.
+- Đào tạo công nghệ thông tin: Cung cấp các khóa học về phát triển phần mềm, an ninh mạng, quản trị hệ thống.
+
+6. Khách hàng tiêu biểu:
+- Tập đoàn XYZ
+- Ngân hàng DEF
+- Công ty GHI
+- Hệ thống bán lẻ JKL
+
+7. Đối tác chiến lược:
+- Microsoft
+- Amazon Web Services (AWS)
+- Google Cloud
+- IBM
+
+8. Thành tựu:
+- Giải thưởng “Doanh nghiệp công nghệ xuất sắc” năm 2022 do Hội Tin học Việt Nam trao tặng.
+- Hơn 100 dự án chuyển đổi số thành công cho các khách hàng lớn.
+- Được vinh danh trong top 50 doanh nghiệp công nghệ phát triển nhanh nhất Việt Nam.
+
+9. Đội ngũ nhân sự:
+Công ty có hơn 500 nhân viên với đội ngũ kỹ sư, chuyên gia giàu kinh nghiệm trong nhiều lĩnh vực công nghệ khác nhau. Chúng tôi chú trọng phát triển văn hóa làm việc sáng tạo, cởi mở và hòa đồng.
+
+10. Trách nhiệm xã hội:
+ABC tích cực tham gia các chương trình hỗ trợ giáo dục, đào tạo kỹ năng số cho học sinh, sinh viên vùng sâu vùng xa. Chúng tôi cam kết thực hiện các hoạt động bảo vệ môi trường trong toàn bộ quy trình sản xuất và vận hành.
+
+11. Thông tin liên hệ:
+Địa chỉ: Số 123, Đường ABC, Quận 1, TP. Hồ Chí Minh
+Điện thoại: 0123 456 789
+Email: contact@abc.com
+Website: www.abc.com
+
+12. Giờ làm việc:
+- Thứ Hai đến Thứ Sáu: 8h00 – 17h30
+- Thứ Bảy: 8h00 – 12h00
+- Chủ nhật nghỉ
+
+13. Hướng phát triển tương lai:
+Công ty tiếp tục đẩy mạnh nghiên cứu và phát triển trí tuệ nhân tạo (AI), Internet vạn vật (IoT) và các công nghệ mới nhằm nâng cao hiệu quả cho khách hàng và mở rộng thị trường quốc tế.
+
+14. Các dịch vụ hỗ trợ khách hàng:
+- Hỗ trợ kỹ thuật 24/7 qua hotline và chat trực tuyến.
+- Cung cấp tài liệu hướng dẫn và đào tạo sử dụng sản phẩm.
+- Dịch vụ bảo trì, nâng cấp phần mềm định kỳ.
+
+---
+
+Mời bạn lưu toàn bộ nội dung trên vào file `company_info.txt` rồi dùng script Python trước đó để chạy hỏi đáp nhé!
+
+Nếu muốn mình làm thêm file `.json` hay `.csv` để quản lý chuyên nghiệp hơn cũng được, hoặc thêm nhiều thông tin chi tiết khác, bạn cứ bảo!
